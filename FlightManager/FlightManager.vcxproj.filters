@@ -13,6 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\models">
+      <UniqueIdentifier>{9216b0c3-82fb-49d6-aba9-fde7214aad10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\dataaccess">
+      <UniqueIdentifier>{8a182243-3932-420b-984e-9772e9ca0f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\domain">
+      <UniqueIdentifier>{0f0c2844-0efb-43ca-90cb-48dbbd8656dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\presentation">
+      <UniqueIdentifier>{30b0c3b4-dc92-46b5-8e37-2be312038140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\utils">
+      <UniqueIdentifier>{a0e72e1d-415f-4de2-9e94-4609611c16a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FlightManager.cpp">
