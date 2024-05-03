@@ -45,6 +45,15 @@
     <ClCompile Include="ExecutingRouteModel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseRepository.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneRepository.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlaneModel.h">
@@ -58,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="ExecutingRouteModel.h">
       <Filter>Файлы заголовков\models</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Файлы заголовков\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseRepository.h">
+      <Filter>Файлы заголовков\dataaccess</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneRepository.h">
+      <Filter>Файлы заголовков\dataaccess</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -127,17 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseRepository.cpp" />
     <ClCompile Include="CoordinateModel.cpp" />
     <ClCompile Include="ExecutingRouteModel.cpp" />
     <ClCompile Include="FlightManager.cpp" />
     <ClCompile Include="PlaneModel.cpp" />
+    <ClCompile Include="PlaneRepository.cpp" />
     <ClCompile Include="RouteModel.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseRepository.h" />
     <ClInclude Include="CoordinateModel.h" />
     <ClInclude Include="ExecutingRouteModel.h" />
     <ClInclude Include="PlaneModel.h" />
+    <ClInclude Include="PlaneRepository.h" />
     <ClInclude Include="RouteModel.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
