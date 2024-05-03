@@ -33,5 +33,31 @@
     <ClCompile Include="FlightManager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="PlaneModel.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="RouteModel.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="CoordinateModel.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecutingRouteModel.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlaneModel.h">
+      <Filter>Файлы заголовков\models</Filter>
+    </ClInclude>
+    <ClInclude Include="RouteModel.h">
+      <Filter>Файлы заголовков\models</Filter>
+    </ClInclude>
+    <ClInclude Include="CoordinateModel.h">
+      <Filter>Файлы заголовков\models</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecutingRouteModel.h">
+      <Filter>Файлы заголовков\models</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
