@@ -28,31 +28,49 @@
     <Filter Include="Файлы заголовков\utils">
       <UniqueIdentifier>{a0e72e1d-415f-4de2-9e94-4609611c16a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\models">
+      <UniqueIdentifier>{b167e8c2-957b-4ee1-9a08-d4528d0af2db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\domain">
+      <UniqueIdentifier>{92aeed09-a430-45f5-8f08-6d3ac065a9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\dataaccess">
+      <UniqueIdentifier>{b0bfcd42-7c52-45d6-9671-895622fa41a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\presentation">
+      <UniqueIdentifier>{d70c61df-2db3-4752-8836-b0b3962addd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\utils">
+      <UniqueIdentifier>{199d131c-941a-41e4-b055-e2e9437b9bd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FlightManager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="PlaneModel.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="CoordinateModel.cpp">
+      <Filter>Исходные файлы\models</Filter>
     </ClCompile>
     <ClCompile Include="RouteModel.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\models</Filter>
     </ClCompile>
-    <ClCompile Include="CoordinateModel.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="PlaneModel.cpp">
+      <Filter>Исходные файлы\models</Filter>
     </ClCompile>
     <ClCompile Include="ExecutingRouteModel.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\models</Filter>
     </ClCompile>
     <ClCompile Include="BaseRepository.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\dataaccess</Filter>
     </ClCompile>
     <ClCompile Include="PlaneRepository.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\dataaccess</Filter>
+    </ClCompile>
+    <ClCompile Include="RouteRepository.cpp">
+      <Filter>Исходные файлы\dataaccess</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Исходные файлы\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +93,9 @@
       <Filter>Файлы заголовков\dataaccess</Filter>
     </ClInclude>
     <ClInclude Include="PlaneRepository.h">
+      <Filter>Файлы заголовков\dataaccess</Filter>
+    </ClInclude>
+    <ClInclude Include="RouteRepository.h">
       <Filter>Файлы заголовков\dataaccess</Filter>
     </ClInclude>
   </ItemGroup>

@@ -134,6 +134,7 @@
     <ClCompile Include="PlaneModel.cpp" />
     <ClCompile Include="PlaneRepository.cpp" />
     <ClCompile Include="RouteModel.cpp" />
+    <ClCompile Include="RouteRepository.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +144,7 @@
     <ClInclude Include="PlaneModel.h" />
     <ClInclude Include="PlaneRepository.h" />
     <ClInclude Include="RouteModel.h" />
+    <ClInclude Include="RouteRepository.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
