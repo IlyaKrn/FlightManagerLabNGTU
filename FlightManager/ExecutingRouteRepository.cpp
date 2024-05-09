@@ -20,7 +20,7 @@ ExecutingRouteModel ExecutingRouteRepository::getById(int id)
 			return *it;
 		++it;
 	}
-	throw string("not found executingRote with id " + id);
+	throw string("not found executingRoute with id " + id);
 }
 
 bool ExecutingRouteRepository::save(ExecutingRouteModel data)

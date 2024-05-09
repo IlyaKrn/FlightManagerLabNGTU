@@ -17,7 +17,7 @@ list<RouteModel> RouteRepository::getAll()
 
     if (!file.is_open())
     {
-        throw runtime_error("Не удалось получить доступ к данным");
+        throw runtime_error("Falied to access data");
     }
 
     string line;
@@ -60,7 +60,7 @@ RouteModel RouteRepository::getById(int searchId)
 
     if (!file.is_open())
     {
-        throw runtime_error("Не удалось получить доступ к файлу с данными маршрутов");
+        throw runtime_error("Falied to access data");
     }
 
     int id;
@@ -90,7 +90,7 @@ RouteModel RouteRepository::getById(int searchId)
     }
 
     file.close();
-    throw invalid_argument("Маршрут с указанным идентификатором не найден");
+    throw invalid_argument("The route with the specified identifier was not found");
 }
 
 bool RouteRepository::save(RouteModel data)
@@ -99,7 +99,7 @@ bool RouteRepository::save(RouteModel data)
 
     if (!file.is_open())
     {
-        throw runtime_error("Не удалось получить доступ к файлу для сохранения");
+        throw runtime_error("Falied to access data");
     }
 
     file << data.getId() << " " << data.getName() << " "
@@ -113,5 +113,38 @@ bool RouteRepository::save(RouteModel data)
 
 bool RouteRepository::deleteById(int id)
 {
-    return false;
+    ifstream fileIn(_filePath);
+    if (!fileIn.is_open())
+    {
+        throw runtime_error("Falied to access data");
+    }
+
+    ofstream fileOut(_filePath + ".tmp");
+
+    if (!fileOut.is_open())
+    {
+        throw runtime_error("Falied to access data");
+    }
+
+    int searchId;
+    string line;
+    bool deleted = false;
+    while (fileIn >> searchId)
+    {
+        getline(fileIn, line);
+        if (searchId == id)
+        {
+            deleted = true;
+            continue;
+        }
+        fileOut << searchId << line << endl;
+    }
+
+    fileIn.close();
+    fileOut.close();
+
+    remove(_filePath.c_str());
+    rename((_filePath + ".tmp").c_str(), _filePath.c_str());
+
+    return deleted;
 }

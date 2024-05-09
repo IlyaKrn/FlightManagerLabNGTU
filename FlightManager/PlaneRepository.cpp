@@ -17,7 +17,7 @@ list<PlaneModel> PlaneRepository::getAll()
 
     if (!file.is_open())
     {
-        throw runtime_error("Íå óäàëîñü ïîëó÷èòü äîñòóï ê äàííûì");
+        throw runtime_error("Falied to access data");
     }
     string line;
     while (getline(file, line))
@@ -60,7 +60,7 @@ PlaneModel PlaneRepository::getById(int id)
 
     if (!file.is_open())
     {
-        throw runtime_error("Не удалось получить доступ к данным");
+        throw runtime_error("Falied to access data");
     }
 
     int searchId, speed, builtYear;
@@ -95,7 +95,7 @@ bool PlaneRepository::save(PlaneModel data)
 
     if (!file.is_open())
     {
-        throw runtime_error("Не удалось получить доступ к файлу для сохранения");
+        throw runtime_error("Falied to access data");
     }
 
     file << data.getId() << " " << data.getModel() << " " << data.getPilot() << " "
@@ -110,8 +110,38 @@ bool PlaneRepository::save(PlaneModel data)
 
 bool PlaneRepository::deleteById(int id)
 {
-    //delete plane from file by id and return true
-    //or return false if plane with data id not exists
-    //or throw "cant access to data" if error while io operations
-    return false;
+    ifstream fileIn(_filePath);
+    if (!fileIn.is_open())
+    {
+        throw runtime_error("Falied to access data");
+    }
+
+    ofstream fileOut(_filePath + ".tmp");
+
+    if (!fileOut.is_open())
+    {
+        throw runtime_error("Falied to access data");
+    }
+
+    int searchId;
+    string line;
+    bool deleted = false;
+    while (fileIn >> searchId)
+    {
+        getline(fileIn, line);
+        if (searchId == id)
+        {
+            deleted = true;
+            continue;
+        }
+        fileOut << searchId << line << endl;
+    }
+
+    fileIn.close();
+    fileOut.close();
+
+    remove(_filePath.c_str());
+    rename((_filePath + ".tmp").c_str(), _filePath.c_str());
+
+    return deleted;
 }
