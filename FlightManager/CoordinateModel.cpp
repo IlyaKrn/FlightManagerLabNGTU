@@ -1,5 +1,13 @@
 #include "CoordinateModel.h"
 
+CoordinateModel::CoordinateModel(double x, double y)
+{
+    _x = x;
+    _y = y;
+}
+
+CoordinateModel::CoordinateModel() = default;
+
 double CoordinateModel::getX()
 {
     return _x;

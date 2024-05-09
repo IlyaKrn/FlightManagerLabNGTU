@@ -1,10 +1,12 @@
 #pragma once
+#include"BaseFileRepository.h"
 #include"RouteModel.h"
 #include<list>
-#include"BaseRepository.h"
 
-class RouteRepository : BaseRepository<RouteModel>
+class RouteRepository : public BaseFileRepository<RouteModel>
 {
+public:
+	RouteRepository(std::string filepath);
 	std::list<RouteModel> getAll() override;
 	RouteModel getById(int id) override;
 	bool save(RouteModel data) override;

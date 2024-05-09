@@ -10,6 +10,9 @@ private:
 	CoordinateModel _start;
 	CoordinateModel _end;
 
+public:
+	RouteModel(int id, std::string name, CoordinateModel start, CoordinateModel end);
+	RouteModel();
 
 	int getId();
 	std::string getName();

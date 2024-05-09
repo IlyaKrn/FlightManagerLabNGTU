@@ -1,5 +1,18 @@
 #include "PlaneModel.h"
 
+PlaneModel::PlaneModel(int id, std::string model, std::string pilot, int speed, int builtYear, std::string country, bool isFlying)
+{
+	_id = id;
+	_model = model;
+	_pilot = pilot;
+	_speed = speed;
+	_builtYear = builtYear;
+	_country = country;
+	_isFlying = isFlying;
+}
+
+PlaneModel::PlaneModel() = default;
+
 int PlaneModel::getId()
 {
 	return _id;
@@ -25,7 +38,7 @@ int PlaneModel::getBuiltYear()
 	return _builtYear;
 }
 
-std::string PlaneModel::getCounty()
+std::string PlaneModel::getCountry()
 {
 	return _country;
 }
@@ -60,7 +73,7 @@ void PlaneModel::setBuiltYear(int builtYear)
 	_builtYear = builtYear;
 }
 
-void PlaneModel::setCounty(std::string country)
+void PlaneModel::setCountry(std::string country)
 {
 	_country = country;
 }

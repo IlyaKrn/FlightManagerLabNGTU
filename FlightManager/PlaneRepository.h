@@ -1,10 +1,12 @@
 #pragma once
-#include"BaseRepository.h"
+#include"BaseFileRepository.h"
 #include"PlaneModel.h"
 #include<list>
 
-class PlaneRepository : BaseRepository<PlaneModel>
+class PlaneRepository : public BaseFileRepository<PlaneModel>
 {
+public:
+	PlaneRepository(std::string filepath);
 	std::list<PlaneModel> getAll() override;
 	PlaneModel getById(int id) override;
 	bool save(PlaneModel data) override;

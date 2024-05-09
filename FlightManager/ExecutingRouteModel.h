@@ -7,6 +7,8 @@ private:
 	long int _timestart;
 
 public:
+	ExecutingRouteModel(int routeId, int planeId, long int timestart);
+	ExecutingRouteModel();
 
 	int getRouteId();
 	int getPlaneId();

@@ -12,14 +12,16 @@ private:
 	std::string _country;
 	bool _isFlying;
 
-
+public:
+	PlaneModel(int id, std::string model, std::string pilot, int speed, int builtYear, std::string country, bool isFlying);
+	PlaneModel();
 
 	int getId();
 	std::string getModel();
 	std::string getPilot();
 	int getSpeed();
 	int getBuiltYear();
-	std::string getCounty();
+	std::string getCountry();
 	bool getIsFlying();
 
 	void setId(int id);
@@ -27,7 +29,7 @@ private:
 	void setPilot(std::string pilot);
 	void setSpeed(int speed);
 	void setBuiltYear(int builtYear);
-	void setCounty(std::string country);
+	void setCountry(std::string country);
 	void setIsFlying(bool isFlying);
 
 };

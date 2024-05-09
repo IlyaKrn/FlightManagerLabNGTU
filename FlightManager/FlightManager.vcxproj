@@ -127,9 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseFileRepository.cpp" />
     <ClCompile Include="BaseRepository.cpp" />
     <ClCompile Include="CoordinateModel.cpp" />
     <ClCompile Include="ExecutingRouteModel.cpp" />
+    <ClCompile Include="ExecutingRouteRepository.cpp" />
     <ClCompile Include="FlightManager.cpp" />
     <ClCompile Include="PlaneModel.cpp" />
     <ClCompile Include="PlaneRepository.cpp" />
@@ -138,9 +140,11 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseFileRepository.h" />
     <ClInclude Include="BaseRepository.h" />
     <ClInclude Include="CoordinateModel.h" />
     <ClInclude Include="ExecutingRouteModel.h" />
+    <ClInclude Include="ExecutingRouteRepository.h" />
     <ClInclude Include="PlaneModel.h" />
     <ClInclude Include="PlaneRepository.h" />
     <ClInclude Include="RouteModel.h" />

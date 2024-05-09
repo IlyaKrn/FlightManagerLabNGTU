@@ -1,5 +1,15 @@
 #include "ExecutingRouteModel.h"
 
+ExecutingRouteModel::ExecutingRouteModel(int routeId, int planeId, long int timestart)
+{
+    _routeId = routeId;
+    _planeId = planeId;
+    _timestart = timestart;
+}
+
+ExecutingRouteModel::ExecutingRouteModel() = default;
+
+
 int ExecutingRouteModel::getRouteId()
 {
     return _routeId;

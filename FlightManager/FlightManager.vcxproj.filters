@@ -43,6 +43,12 @@
     <Filter Include="Исходные файлы\utils">
       <UniqueIdentifier>{199d131c-941a-41e4-b055-e2e9437b9bd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\dataaccess\abstract">
+      <UniqueIdentifier>{f67f9c2d-cec5-474d-928f-f03ba705f93c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\dataaccess\abstract">
+      <UniqueIdentifier>{754d6ecc-27ba-4b89-8eb8-5e5fcec6f133}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FlightManager.cpp">
@@ -60,9 +66,6 @@
     <ClCompile Include="ExecutingRouteModel.cpp">
       <Filter>Исходные файлы\models</Filter>
     </ClCompile>
-    <ClCompile Include="BaseRepository.cpp">
-      <Filter>Исходные файлы\dataaccess</Filter>
-    </ClCompile>
     <ClCompile Include="PlaneRepository.cpp">
       <Filter>Исходные файлы\dataaccess</Filter>
     </ClCompile>
@@ -71,6 +74,15 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Исходные файлы\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecutingRouteRepository.cpp">
+      <Filter>Исходные файлы\dataaccess</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseRepository.cpp">
+      <Filter>Исходные файлы\dataaccess\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseFileRepository.cpp">
+      <Filter>Исходные файлы\dataaccess\abstract</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,14 +101,20 @@
     <ClInclude Include="Timer.h">
       <Filter>Файлы заголовков\utils</Filter>
     </ClInclude>
-    <ClInclude Include="BaseRepository.h">
-      <Filter>Файлы заголовков\dataaccess</Filter>
-    </ClInclude>
     <ClInclude Include="PlaneRepository.h">
       <Filter>Файлы заголовков\dataaccess</Filter>
     </ClInclude>
     <ClInclude Include="RouteRepository.h">
       <Filter>Файлы заголовков\dataaccess</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecutingRouteRepository.h">
+      <Filter>Файлы заголовков\dataaccess</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseFileRepository.h">
+      <Filter>Файлы заголовков\dataaccess\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseRepository.h">
+      <Filter>Файлы заголовков\dataaccess\abstract</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

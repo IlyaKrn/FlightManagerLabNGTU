@@ -1,5 +1,15 @@
 #include "RouteModel.h"
 
+RouteModel::RouteModel(int id, std::string name, CoordinateModel start, CoordinateModel end)
+{
+    _id = id;
+    _name = name;
+    _start = start;
+    _end = end;
+}
+
+RouteModel::RouteModel() = default;
+
 int RouteModel::getId()
 {
     return _id;
