@@ -1,4 +1,5 @@
-﻿#include "PlaneRepository.h"
+﻿#include "BaseRepository.h"
+#include "PlaneRepository.h"
 #include <fstream>
 #include <sstream>
 
@@ -109,38 +110,8 @@ bool PlaneRepository::save(PlaneModel data)
 
 bool PlaneRepository::deleteById(int id)
 {
-    ifstream fileIn(_filePath);
-    if (!fileIn.is_open())
-    {
-        throw runtime_error("Не удалось получить доступ к файлу для удаления");
-    }
-
-    ofstream fileOut(_filePath + ".tmp");
-
-    if (!fileOut.is_open())
-    {
-        throw runtime_error("Не удалось создать временный файл");
-    }
-
-    int searchId;
-    string line;
-    bool deleted = false;
-    while (fileIn >> searchId)
-    {
-        getline(fileIn, line);
-        if (searchId == id)
-        {
-            deleted = true;
-            continue;
-        }
-        fileOut << searchId << line << endl;
-    }
-
-    fileIn.close();
-    fileOut.close();
-
-    remove(_filePath.c_str());
-    rename((_filePath + ".tmp").c_str(), _filePath.c_str());
-
-    return deleted;
+    //delete plane from file by id and return true
+    //or return false if plane with data id not exists
+    //or throw "cant access to data" if error while io operations
+    return false;
 }

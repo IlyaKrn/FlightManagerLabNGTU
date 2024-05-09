@@ -1,3 +1,4 @@
+#include "RouteModel.h"
 #include "RouteRepository.h"
 #include <fstream>
 #include <sstream>
@@ -112,38 +113,5 @@ bool RouteRepository::save(RouteModel data)
 
 bool RouteRepository::deleteById(int id)
 {
-    ifstream fileIn(_filePath);
-    if (!fileIn.is_open())
-    {
-        throw runtime_error("Не удалось получить доступ к файлу для удаления");
-    }
-
-    ofstream fileOut(_filePath + ".tmp");
-
-    if (!fileOut.is_open())
-    {
-        throw runtime_error("Не удалось создать временный файл");
-    }
-
-    int searchId;
-    string line;
-    bool deleted = false;
-    while (fileIn >> searchId)
-    {
-        getline(fileIn, line);
-        if (searchId == id)
-        {
-            deleted = true;
-            continue;
-        }
-        fileOut << searchId << line << endl;
-    }
-
-    fileIn.close();
-    fileOut.close();
-
-    remove(_filePath.c_str());
-    rename((_filePath + ".tmp").c_str(), _filePath.c_str());
-
-    return deleted;
+    return false;
 }
