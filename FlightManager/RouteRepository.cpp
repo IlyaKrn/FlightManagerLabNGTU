@@ -95,20 +95,43 @@ RouteModel RouteRepository::getById(int searchId)
 
 bool RouteRepository::save(RouteModel data)
 {
-    ofstream file(_filePath, ios::app);
-
-    if (!file.is_open())
-    {
-        throw runtime_error("Falied to access data");
+    if (data.getId() != -1) {
+        ofstream file(_filePath);
+        deleteById(data.getId());
+        file << data.getId() << " " << data.getName() << " "
+            << data.getStart().getX() << " " << data.getStart().getY() << " "
+            << data.getEnd().getX() << "  " << data.getEnd().getY() << std::endl;
+        return data.getId();
     }
+    else {
+        ifstream readFile(_filePath);
+        int maxId = 0;
+        string line;
+        while (getline(readFile, line))
+        {
+            stringstream ss(line);
+            int id;
+            ss >> id;
+            maxId = max(maxId, id);
+        }
+        readFile.close();
 
-    file << data.getId() << " " << data.getName() << " "
-        << data.getStart().getX() << " " << data.getStart().getY() << " "
-        << data.getEnd().getX() << "  " << data.getEnd().getY() << std::endl;
+        data.setId(maxId + 1);
+        ofstream file(_filePath, ios::app);
 
-    file.close();
+        if (!file.is_open())
+        {
+            throw runtime_error("Falied to access data");
+        }
 
-    return true;
+        file << data.getId() << " " << data.getName() << " "
+            << data.getStart().getX() << " " << data.getStart().getY() << " "
+            << data.getEnd().getX() << "  " << data.getEnd().getY() << std::endl;
+
+        file.close();
+
+        return true;
+    }
 }
 
 bool RouteRepository::deleteById(int id)

@@ -40,7 +40,6 @@ list<PlaneModel> PlaneRepository::getAll()
         plane.setSpeed(speed);
         plane.setBuiltYear(builtYear);
         plane.setCountry(country);
-        plane.setIsFlying(isFlying);
 
         planes.push_back(plane);
 
@@ -78,7 +77,6 @@ PlaneModel PlaneRepository::getById(int id)
             plane.setSpeed(speed);
             plane.setBuiltYear(builtYear);
             plane.setCountry(country);
-            plane.setIsFlying(isFlying);
             break;
         }
     }
@@ -91,20 +89,42 @@ PlaneModel PlaneRepository::getById(int id)
 
 bool PlaneRepository::save(PlaneModel data)
 {
-    ofstream file(_filePath, ios::app);
-
-    if (!file.is_open())
-    {
-        throw runtime_error("Falied to access data");
+    if (data.getId() != -1) {
+        ofstream file(_filePath);
+        deleteById(data.getId());
+        file << data.getId() << " " << data.getModel() << " " << data.getPilot() << " "
+            << data.getSpeed() << " " << data.getBuiltYear() << " " << data.getCountry() << endl;
+        return data.getId();
     }
+    else {
+        ifstream readFile(_filePath);
+        int maxId = 0;
+        string line;
+        while (getline(readFile, line))
+        {
+            stringstream ss(line);
+            int id;
+            ss >> id;
+            maxId = max(maxId, id);
+        }
+        readFile.close();
 
-    file << data.getId() << " " << data.getModel() << " " << data.getPilot() << " "
-        << data.getSpeed() << " " << data.getBuiltYear() << " " << data.getCountry() << " "
-        << data.getIsFlying() << endl;
+        data.setId(maxId + 1);
 
-    file.close();
+        ofstream file(_filePath, ios::app);
 
-    return true;
+        if (!file.is_open())
+        {
+            throw runtime_error("Failed to access data");
+        }
+
+        file << data.getId() << " " << data.getModel() << " " << data.getPilot() << " "
+            << data.getSpeed() << " " << data.getBuiltYear() << " " << data.getCountry() << endl;
+
+        file.close();
+
+        return data.getId();
+    }
 }
 
 

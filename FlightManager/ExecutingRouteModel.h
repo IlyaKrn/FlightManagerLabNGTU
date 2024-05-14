@@ -17,6 +17,9 @@ public:
 	void setRouteId(int routeId);
 	void setPlaneId(int planeId);
 	void setTimestart(long int timestart);
-
+	bool operator==(const ExecutingRouteModel& other) const {
+		return _planeId == other._planeId && _routeId == other._routeId;
+	}
+	
 };
 

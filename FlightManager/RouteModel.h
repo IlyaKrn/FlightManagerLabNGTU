@@ -23,6 +23,8 @@ public:
 	void setName(std::string name);
 	void setStart(CoordinateModel start);
 	void setEnd(CoordinateModel end);
-
+	bool operator==(const RouteModel& other) const {
+		return _id == other._id;
+	}
 };
 
