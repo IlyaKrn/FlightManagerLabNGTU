@@ -25,9 +25,6 @@
     <Filter Include="Файлы заголовков\presentation">
       <UniqueIdentifier>{30b0c3b4-dc92-46b5-8e37-2be312038140}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\utils">
-      <UniqueIdentifier>{a0e72e1d-415f-4de2-9e94-4609611c16a2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\models">
       <UniqueIdentifier>{b167e8c2-957b-4ee1-9a08-d4528d0af2db}</UniqueIdentifier>
     </Filter>
@@ -40,14 +37,17 @@
     <Filter Include="Исходные файлы\presentation">
       <UniqueIdentifier>{d70c61df-2db3-4752-8836-b0b3962addd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\utils">
-      <UniqueIdentifier>{199d131c-941a-41e4-b055-e2e9437b9bd1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\dataaccess\abstract">
       <UniqueIdentifier>{f67f9c2d-cec5-474d-928f-f03ba705f93c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Исходные файлы\dataaccess\abstract">
       <UniqueIdentifier>{754d6ecc-27ba-4b89-8eb8-5e5fcec6f133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\time">
+      <UniqueIdentifier>{a0e72e1d-415f-4de2-9e94-4609611c16a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\time">
+      <UniqueIdentifier>{199d131c-941a-41e4-b055-e2e9437b9bd1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -73,7 +73,7 @@
       <Filter>Исходные файлы\dataaccess</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>Исходные файлы\utils</Filter>
+      <Filter>Исходные файлы\time</Filter>
     </ClCompile>
     <ClCompile Include="ExecutingRouteRepository.cpp">
       <Filter>Исходные файлы\dataaccess</Filter>
@@ -85,7 +85,10 @@
       <Filter>Исходные файлы\dataaccess\abstract</Filter>
     </ClCompile>
     <ClCompile Include="RouteManager.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\domain</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneStatusModel.cpp">
+      <Filter>Исходные файлы\models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +105,7 @@
       <Filter>Файлы заголовков\models</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>Файлы заголовков\utils</Filter>
+      <Filter>Файлы заголовков\time</Filter>
     </ClInclude>
     <ClInclude Include="PlaneRepository.h">
       <Filter>Файлы заголовков\dataaccess</Filter>
@@ -119,13 +122,11 @@
     <ClInclude Include="BaseRepository.h">
       <Filter>Файлы заголовков\dataaccess\abstract</Filter>
     </ClInclude>
-    <ClInclude Include="RouteManager.h">
-      <Filter>Исходные файлы</Filter>
+    <ClInclude Include="PlaneStatusModel.h">
+      <Filter>Файлы заголовков\models</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="planes.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
+    <ClInclude Include="RouteManager.h">
+      <Filter>Файлы заголовков\domain</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
