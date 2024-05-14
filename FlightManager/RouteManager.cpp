@@ -6,6 +6,7 @@
 #include "ExecutingRouteModel.h"
 #include "ExecutingRouteRepository.h"
 #include "Timer.h"
+#include <cmath>
 RouteManager::RouteManager() = default;
 RouteModel RouteManager::addRoute(RouteModel route) {
 	RouteRepository routes = RouteRepository(fileRoutes);
@@ -13,7 +14,13 @@ RouteModel RouteManager::addRoute(RouteModel route) {
 	return m;
 }
 bool RouteManager::deleteRouteById(int id) {
-	//check if this route in executing route
+	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
+	for (ExecutingRouteModel executingroute : allexecutingroutes) {
+		if (executingroute.getRouteId() == id) {
+			return false; 
+		}
+	}
 	RouteRepository routes = RouteRepository(fileRoutes);
 	return routes.deleteById(id);
 }
@@ -23,7 +30,13 @@ PlaneModel RouteManager::addPlane(PlaneModel plane) {
 	return m;
 }
 bool RouteManager::deletePlaneById(int id) {
-	//check if this plane in executing route
+	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
+	for (ExecutingRouteModel executingroute : allexecutingroutes) {
+		if (executingroute.getPlaneId() == id) {
+			return false;
+		}
+	}
 	PlaneRepository planes = PlaneRepository(filePlanes);
 	return planes.deleteById(id);
 }
@@ -118,16 +131,82 @@ std::list<PlaneModel> RouteManager::getPlaneById(int id)
 std::list<PlaneModel> RouteManager::getFlyingPlanes()
 {
 	updateExecutingRoutes();
-	//return flying planes
+	std::list<PlaneModel> flyingPlanes;
+	PlaneRepository planes = PlaneRepository(filePlanes);
+	std::list<PlaneModel> allplanes = planes.getAll();
+	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
+	for (PlaneModel plane : allplanes) {
+		bool isFlying = false;
+		for (ExecutingRouteModel route : allexecutingroutes) {
+			if (route.getPlaneId() == plane.getId()) {
+				isFlying = true;
+				break;
+			}
+		}
+
+		if (isFlying) {
+			flyingPlanes.push_back(plane);
+		}
+	}
 	return std::list<PlaneModel>();
 }
 std::list<PlaneStatusModel> RouteManager::getAllPlanesCoordinates()
 {
 	updateExecutingRoutes();
-	//return list of planes status (id, currentCoordinbate ....)
+	std::list<PlaneStatusModel> planesStatus;
+	for (PlaneStatusModel plane : planesStatus) {
+		PlaneStatusModel planestatus;
+		planestatus.setPlaneId(plane.getPlaneId());
+		planestatus.setCurrentCoordinates(plane.getCurrentCoordinates());
+		planestatus.setTotalTime(plane.getTotalTime());
+		planestatus.setTimeLeft(plane.getTimeLeft());
+	}
 	return std::list<PlaneStatusModel>();
 }
 void RouteManager::updateExecutingRoutes()
 {
-	//update executing routes in file (calculate time ending of roude and if current time > time of ending delete this executing route)
+	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
+	std::list<ExecutingRouteModel> allexecutingRoutes = executingroutes.getAll();
+	PlaneRepository planes = PlaneRepository(filePlanes);
+	std::list<PlaneModel> allplanes = planes.getAll();
+	RouteRepository routes = RouteRepository(fileRoutes);
+	std::list<RouteModel> allroutes = routes.getAll();
+	long int currentTime = timer.getCurrentTime();
+
+	auto it = allexecutingRoutes.begin();
+
+	while (it != allexecutingRoutes.end())
+	{
+		int speed;
+		for (ExecutingRouteModel executeroute : allexecutingRoutes) {
+			for (PlaneModel plane : allplanes) {
+				if (executeroute.getPlaneId() == plane.getId()) {
+					speed = plane.getSpeed();
+				}
+			}
+		}
+		CoordinateModel start;
+		CoordinateModel end;
+		for (ExecutingRouteModel executeroute : allexecutingRoutes) {
+			for (RouteModel route : allroutes) {
+				if (executeroute.getPlaneId() == route.getId()) {
+					start = route.getStart();
+					end = route.getEnd();
+				}
+			}
+		}
+		double duration = sqrt(pow((end.getX() - start.getX()),2) + pow((end.getY() - start.getY()), 2));
+
+		long int routeEndTime = it->getTimestart() + duration / speed;
+
+		if (currentTime > routeEndTime)
+		{
+			it = allexecutingRoutes.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }

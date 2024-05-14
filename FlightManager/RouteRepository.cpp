@@ -66,7 +66,7 @@ RouteModel RouteRepository::getById(int searchId)
     int id;
     string name;
     double startX, startY, endX, endY;
-
+    RouteModel route;
     while (file >> id >> name >> startX >> startY >> endX >> endY)
     {
         if (searchId == id)
@@ -78,19 +78,17 @@ RouteModel RouteRepository::getById(int searchId)
             end.setX(endX);
             end.setY(endY);
 
-            RouteModel route;
+            
             route.setId(id);
             route.setName(name);
             route.setStart(start);
             route.setEnd(end);
-
-            file.close();
-            return route;
+            break;
         }
     }
 
     file.close();
-    throw invalid_argument("The route with the specified identifier was not found");
+    return route;
 }
 
 RouteModel RouteRepository::save(RouteModel data)
