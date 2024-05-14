@@ -9,7 +9,7 @@ public:
 	PlaneRepository(std::string filepath);
 	std::list<PlaneModel> getAll() override;
 	PlaneModel getById(int id) override;
-	bool save(PlaneModel data) override;
+	PlaneModel save(PlaneModel data) override;
 	bool deleteById(int id) override;
 };
 

@@ -23,19 +23,19 @@ ExecutingRouteModel ExecutingRouteRepository::getById(int id)
 	throw string("not found executingRoute with id " + id);
 }
 
-bool ExecutingRouteRepository::save(ExecutingRouteModel data)
+ExecutingRouteModel ExecutingRouteRepository::save(ExecutingRouteModel data)
 {
 	list<ExecutingRouteModel>::iterator it = _executingRoutes.begin();
 	for (int i = 0; i < _executingRoutes.size(); i++) {
 		if (it->getRouteId() == data.getRouteId()) 
 		{
 			*it = data;
-			return true;
+			return data;
 		}
 		++it;
 	}
 	_executingRoutes.push_back(data);
-	return true;
+	return data;
 }
 
 bool ExecutingRouteRepository::deleteById(int id)

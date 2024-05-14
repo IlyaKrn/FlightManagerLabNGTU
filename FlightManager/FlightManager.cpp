@@ -14,7 +14,7 @@ int main()
     manager.deletePlaneById(2);*/
     
     
-    list<PlaneModel> availablePlanes = manager.getAvailablePlanes();
+    list<PlaneModel> availablePlanes = manager.getFreePlanes();
 
     
     for (PlaneModel& plane : availablePlanes) {

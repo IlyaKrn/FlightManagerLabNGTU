@@ -87,14 +87,14 @@ PlaneModel PlaneRepository::getById(int id)
 }
 
 
-bool PlaneRepository::save(PlaneModel data)
+PlaneModel PlaneRepository::save(PlaneModel data)
 {
     if (data.getId() != -1) {
         ofstream file(_filePath);
         deleteById(data.getId());
         file << data.getId() << " " << data.getModel() << " " << data.getPilot() << " "
             << data.getSpeed() << " " << data.getBuiltYear() << " " << data.getCountry() << endl;
-        return data.getId();
+        return data;
     }
     else {
         ifstream readFile(_filePath);
@@ -123,7 +123,7 @@ bool PlaneRepository::save(PlaneModel data)
 
         file.close();
 
-        return data.getId();
+        return data;
     }
 }
 

@@ -11,6 +11,6 @@ public:
 
     std::list<ExecutingRouteModel> getAll() override;
     ExecutingRouteModel getById(int id) override;
-    bool save(ExecutingRouteModel data) override;
+    ExecutingRouteModel save(ExecutingRouteModel data) override;
     bool deleteById(int id) override;
 };

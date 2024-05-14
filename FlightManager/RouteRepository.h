@@ -9,7 +9,7 @@ public:
 	RouteRepository(std::string filepath);
 	std::list<RouteModel> getAll() override;
 	RouteModel getById(int id) override;
-	bool save(RouteModel data) override;
+	RouteModel save(RouteModel data) override;
 	bool deleteById(int id) override;
 };
 

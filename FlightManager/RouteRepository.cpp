@@ -93,7 +93,7 @@ RouteModel RouteRepository::getById(int searchId)
     throw invalid_argument("The route with the specified identifier was not found");
 }
 
-bool RouteRepository::save(RouteModel data)
+RouteModel RouteRepository::save(RouteModel data)
 {
     if (data.getId() != -1) {
         ofstream file(_filePath);
@@ -101,7 +101,7 @@ bool RouteRepository::save(RouteModel data)
         file << data.getId() << " " << data.getName() << " "
             << data.getStart().getX() << " " << data.getStart().getY() << " "
             << data.getEnd().getX() << "  " << data.getEnd().getY() << std::endl;
-        return data.getId();
+        return data;
     }
     else {
         ifstream readFile(_filePath);
@@ -130,7 +130,7 @@ bool RouteRepository::save(RouteModel data)
 
         file.close();
 
-        return true;
+        return data;
     }
 }
 
