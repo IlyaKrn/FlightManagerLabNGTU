@@ -198,7 +198,7 @@ void RouteManager::updateExecutingRoutes()
 		}
 		double duration = sqrt(pow((end.getX() - start.getX()),2) + pow((end.getY() - start.getY()), 2));
 
-		long int routeEndTime = it->getTimestart() + duration / speed;
+		long int routeEndTime = it->getTimestart() + duration / (speed * 1000);
 
 		if (currentTime > routeEndTime)
 		{
