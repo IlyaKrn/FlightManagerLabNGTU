@@ -90,6 +90,9 @@
     <ClCompile Include="PlaneStatusModel.cpp">
       <Filter>Исходные файлы\models</Filter>
     </ClCompile>
+    <ClCompile Include="Presenter.cpp">
+      <Filter>Исходные файлы\presentation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlaneModel.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="RouteManager.h">
       <Filter>Файлы заголовков\domain</Filter>
+    </ClInclude>
+    <ClInclude Include="Presenter.h">
+      <Filter>Файлы заголовков\presentation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

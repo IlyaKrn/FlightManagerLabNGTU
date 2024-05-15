@@ -27,7 +27,7 @@ public:
 	std::list<RouteModel> getFreeRoutes();
 	std::list<PlaneModel> getFreePlanes();
 	void executeRoute(int routeId, int planeId);
-	std::list<PlaneStatusModel> getAllPlanesCoordinates();
+	std::list<PlaneStatusModel> getPlanesCoordinates();
 	void skipTime(long int skippedMillis);
 
 };

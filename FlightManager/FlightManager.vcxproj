@@ -136,6 +136,7 @@
     <ClCompile Include="PlaneModel.cpp" />
     <ClCompile Include="PlaneRepository.cpp" />
     <ClCompile Include="PlaneStatusModel.cpp" />
+    <ClCompile Include="Presenter.cpp" />
     <ClCompile Include="RouteManager.cpp" />
     <ClCompile Include="RouteModel.cpp" />
     <ClCompile Include="RouteRepository.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="PlaneModel.h" />
     <ClInclude Include="PlaneRepository.h" />
     <ClInclude Include="PlaneStatusModel.h" />
+    <ClInclude Include="Presenter.h" />
     <ClInclude Include="RouteManager.h" />
     <ClInclude Include="RouteModel.h" />
     <ClInclude Include="RouteRepository.h" />

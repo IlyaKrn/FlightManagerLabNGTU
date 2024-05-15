@@ -1,16 +1,10 @@
 #pragma once
-#include <iostream>
-#include "RouteManager.h"
-
-
-#include "BaseFileRepository.h"
-#include "BaseRepository.h"
-#include "ExecutingRouteRepository.h"
-#include "PlaneRepository.h"
-#include "RouteRepository.h"
-
-namespace Presenter{
-
+#include"RouteManager.h"
+class Presenter{
+private:
+	RouteManager manager;
+public:
+	Presenter();
 	void createAndAddPlane();
 	void createAndAddRoute();
 	void deletePlane();
@@ -19,12 +13,12 @@ namespace Presenter{
 	void getingAllRoutes();
 	void searchPlane();
 	void searchRoute();
-	void GetBusyRoutes();
-	void GetAvaiableRoutes();
-	void GetBusyPlanes();
-	void GetAvaiablePlanes();
-	void AssignPlaneToRoute();
-	void GetCoordinates();
+	void getBusyRoutes();
+	void getAvaiableRoutes();
+	void getBusyPlanes();
+	void getAvaiablePlanes();
+	void assignPlaneToRoute();
+	void getCoordinates();
 	void skip();
 	
 };

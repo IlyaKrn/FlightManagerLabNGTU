@@ -151,7 +151,7 @@ std::list<PlaneModel> RouteManager::getFlyingPlanes()
 	}
 	return std::list<PlaneModel>();
 }
-std::list<PlaneStatusModel> RouteManager::getAllPlanesCoordinates()
+std::list<PlaneStatusModel> RouteManager::getPlanesCoordinates()
 {
 	updateExecutingRoutes();
 	std::list<PlaneStatusModel> planesStatus;

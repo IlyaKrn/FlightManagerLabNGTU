@@ -1,140 +1,187 @@
 #include <iostream>
 #include "Presenter.h"
 using namespace std;
-using namespace Presenter;
-                void createAndAddPlane(){
-                     PlaneModel plane;
-                     std::string model;
-                     std::string pilot;
-                     int speed;
-                     int builtYear;
-                     std::string country;
 
-                     cout <<"enter model"<<endl;
-                     cin >> model;
-                     cout <<"enter pilot"<<endl;
-                     cin >> pilot;
-                     cout <<"enter speed"<<endl;
-                     cin >> speed;
-                     cout <<"enter built Year"<<endl;
-                     cin >> builtYear;
-                     cout <<"enter country"<<endl;
-                     cin >> country;
-                     PlaneModel::PlaneModel(-1, model, pilot, speed, builtYear, country)
-                     RouteManager::addPlane(plane);
-                     cout <<"Plane with id "<< id<< " created" <<endl;
-                }
-                void deletePlane(){
-                     cout <<"enter id"<<endl;
-                     cin >> int id;
-                    RouteManager::deletePlaneById(id);
+Presenter::Presenter() = default;
 
+void Presenter::createAndAddPlane() {
+    std::string model;
+    std::string pilot;
+    int speed;
+    int builtYear;
+    std::string country;
 
+    cout << "enter model" << endl;
+    cin >> model;
+    cout << "enter pilot" << endl;
+    cin >> pilot;
+    cout << "enter speed (m/s)" << endl;
+    cin >> speed;
+    cout << "enter built Year" << endl;
+    cin >> builtYear;
+    cout << "enter country" << endl;
+    cin >> country;
+    int id = manager.addPlane(PlaneModel(-1, model, pilot, speed, builtYear, country)).getId();
+    cout << "Plane with id " << id << " created" << endl;
+}
 
-               }
-                void getingAllPlanes(){
-                    std::list<PlaneModel> RouteManager::getAllPlanes();
+void Presenter::deletePlane() {
+    cout << "enter id" << endl;
+    int id;
+    cin >> id;
+    cout << "plane with id: " << id << (manager.deletePlaneById(id) ? " deleted successful" : "failed to delete") << endl;
+}
 
-               }
-                void searchPlane(){
-                     cout <<"enter id"<<endl;
-                     cin >> int id;
-                   std::list<RouteModel> RouteManager::getPlaneById(id);
-                }
-              
+void Presenter::getingAllPlanes() {
+    for (PlaneModel& plane : manager.getAllPlanes()) {
+        cout <<
+            "id: " << plane.getId() <<
+            " model: " << plane.getModel() <<
+            " pilot: " << plane.getPilot() <<
+            " country: " << plane.getCountry() <<
+            " speed: " << plane.getSpeed() <<
+            " built year: " << plane.getBuiltYear() << endl;
+    }
+}
 
+void Presenter::searchPlane() {
+    int id;
+    cin >> id;
+    for (PlaneModel& plane : manager.getPlaneById(id)) {
+        cout <<
+            "id: " << plane.getId() <<
+            " model: " << plane.getModel() <<
+            " pilot: " << plane.getPilot() <<
+            " country: " << plane.getCountry() <<
+            " speed: " << plane.getSpeed() <<
+            " built year: " << plane.getBuiltYear() << endl;
+    }
+}
 
-                 
-      
-                	void createAndAddRoute(){
-                   RouteModel route;
-                   
-                    int id;
-                    std::string name;
-                    CoordinateModel start;
-                    CoordinateModel end;
+void Presenter::createAndAddRoute(){
+    std::string name;
+    int x1;
+    int x2;
+    int y1;
+    int y2;
 
-                    cout <<"enter name"<<endl;
-                     cin >> name;
-                     cout <<"enter start"<<endl;
-                     cin >> start;
-                     cout <<"enter end"<<endl;
-                     cin >> end;
-                    RouteModel::RouteModel(-1, name, start, end);
-                    RouteManager::addRoute(route);
-                     cout <<"route with id "<< id<< " created" <<endl;
-                     
+    cout <<"enter name"<<endl;
+    cin >> name;
+    cout << "enter start x (m)" << endl;
+    cin >> x1;
+    cout << "enter start y (m)" << endl;
+    cin >> y1;
+    cout << "enter end x (m)" << endl;
+    cin >> x2;
+    cout << "enter end y (m)" << endl;
+    cin >> y2;
+    
+    int id = manager.addRoute(RouteModel(-1, name, CoordinateModel(x1, y1), CoordinateModel(x2, y2))).getId();
+    
+    cout <<"route with id "<< id<< " created" <<endl;
+}
 
+void Presenter::deleteRoute(){
+    cout << "enter id" << endl;
+    int id;
+    cin >> id;
+    cout << "route with id: " << id << (manager.deletePlaneById(id) ? " deleted successful" : "failed to delete") << endl;
+}
 
+void Presenter::getingAllRoutes(){
+    for (RouteModel& route : manager.getAllRoutes()) {
+        cout <<
+            "id: " << route.getId() <<
+            " name: " << route.getName() <<
+            " start: (" << route.getStart().getX() << ", " << route.getStart().getY() << ")" <<
+            " end: (" << route.getEnd().getX() << ", " << route.getEnd().getY() << ")" << endl;
+    }
+}
 
-               }
-              void deleteRoute(){
-                   cout <<"enter id"<<endl;
-                     cin >> int id;
-                    RouteManager::deleteRouteById(id);
+void Presenter::searchRoute(){
+    cout << "enter id" << endl;
+    int id;
+    cin >> id;
+    for (RouteModel& route : manager.getRouteById(id)) {
+        cout <<
+            "id: " << route.getId() <<
+            " name: " << route.getName() <<
+            " start: (" << route.getStart().getX() << ", " << route.getStart().getY() << ")" <<
+            " end: (" << route.getEnd().getX() << ", " << route.getEnd().getY() << ")" << endl;
+    }
+}
 
+void Presenter::getBusyRoutes(){
+    for (ExecutingRouteModel& route : manager.getExecutingRoutes()) {
+        cout <<
+            "plane id: " << route.getPlaneId() <<
+            " route id: " << route.getRouteId() <<
+            " timestart: (" << route.getTimestart() << endl;
+    }
+}
 
-              }
-              void getingAllRoutes(){
-                 std::list<RouteModel> RouteManager::getAllRoutes();
+void Presenter::getAvaiableRoutes(){
+    for (RouteModel& route : manager.getFreeRoutes()) {
+        cout <<
+            "id: " << route.getId() <<
+            " name: " << route.getName() <<
+            " start: (" << route.getStart().getX() << ", " << route.getStart().getY() << ")" <<
+            " end: (" << route.getEnd().getX() << ", " << route.getEnd().getY() << ")" << endl;
+    }
+}
 
+void Presenter::getBusyPlanes(){
+    for (PlaneModel& plane : manager.getFlyingPlanes()) {
+        cout <<
+            "id: " << plane.getId() <<
+            " model: " << plane.getModel() <<
+            " pilot: " << plane.getPilot() <<
+            " country: " << plane.getCountry() <<
+            " speed: " << plane.getSpeed() <<
+            " built year: " << plane.getBuiltYear() << endl;
+    }
+}
 
+void Presenter::getAvaiablePlanes(){
+    for (PlaneModel& plane : manager.getFreePlanes()) {
+        cout <<
+            "id: " << plane.getId() <<
+            " model: " << plane.getModel() <<
+            " pilot: " << plane.getPilot() <<
+            " country: " << plane.getCountry() <<
+            " speed: " << plane.getSpeed() <<
+            " built year: " << plane.getBuiltYear() << endl;
+    }
+}
 
-              }
-              void searchRoute(){
-                    cout <<"enter id"<<endl;
-                     cin >> int id;
-                   std::list<RouteModel> RouteManager::getRouteById(id);
+void Presenter::assignPlaneToRoute(){
+    int rid;
+    int pid;
+    cout << "enter route id" << endl;
+    cin >> rid;
+    cout << "enter plane id" << endl;
+    cin >> pid;
 
+    manager.executeRoute(rid, pid);
 
-              }
+    cout << "plane with id " << pid << " assigned to route with id: " << rid << endl;
+}
 
+void Presenter::getCoordinates(){
 
-      
-                void GetBusyRoutes(){
-                    std::list<ExecutingRouteModel> RouteManager::getExecutingRoutes();
+    for (PlaneStatusModel& plane : manager.getPlanesCoordinates()) {
+        cout <<
+            "id: " << plane.getPlaneId() <<
+            " total time: " << plane.getTotalTime() <<
+            " time left: " << plane.getTimeLeft() <<
+            " coordinates: (" << plane.getCurrentCoordinates().getX() << ", " << plane.getCurrentCoordinates().getY() << ")" << endl;
+    }
+}
 
-
-               }
-               void GetAvaiableRoutes(){
-                   std::list<RouteModel> RouteManager::getAvailableRoutes();
-
-
-              }
-              void GetBusyPlanes(){
-                   int routeId;
-                   int planeId;
-                   cout <<"enter route id"<<endl;
-                     cin >> routeId;
-                     cout <<"enter plane id"<<endl;
-                     cin >> planeId;
-                    
-                   RouteManager::executeRoute(routeId, planeId);
-
-
-
-              }
-             void GetAvaiablePlanes(){
-                   std::list<PlaneStatusModel> RouteManager::getAllPlanesCoordinates();
-
-
-              }
-              void AssignPlaneToRoute(){
-                   std::list<PlaneModel> RouteManager::getAvailablePlanes();
-
-              }
-               void GetCoordinates(){
-                    std::list<PlaneModel> RouteManager::getFlyingPlanes()
-
-
-
-              }
-             void skip(){
-                  long int skippedMillis;
-                  cout <<"enter how many hours to skip?"<<endl;
-                     cin >> skippedMillis;
-                  skipTime(skippedMillis);
-
-              }
-
-
+void Presenter::skip(){
+    long int skipped;
+    cout << "enter skipped milliseconds" << endl;
+    cin >> skipped;
+    manager.skipTime(skipped);
+    cout << skipped << " milliseconds skipped" << endl;
+}
