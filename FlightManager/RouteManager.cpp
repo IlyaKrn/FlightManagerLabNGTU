@@ -176,8 +176,9 @@ std::list<PlaneStatusModel> RouteManager::getPlanesCoordinates()
 						CoordinateModel currentcoordinates;
 						currentcoordinates.setX(newX);
 						currentcoordinates.setY(newX);
-						long int timeleft = duration / (speed * 1000) - timer.getCurrentTime();
-						planesStatus.push_back(PlaneStatusModel(plane.getId(), currentcoordinates, duration, timeleft));
+						long int totaltime = duration / (speed * 1000);
+						long int timeleft = totaltime - elapsedTime;
+						planesStatus.push_back(PlaneStatusModel(plane.getId(), currentcoordinates, totaltime, timeleft));
 					}
 				}
 			}
