@@ -9,7 +9,7 @@
 #include <cmath>
 RouteManager::RouteManager() = default;
 RouteModel RouteManager::addRoute(RouteModel route) {
-	RouteRepository routes = RouteRepository(fileRoutes);
+	RouteRepository routes(fileRoutes);
 	RouteModel m = routes.save(route);
 	return m;
 }
@@ -21,11 +21,11 @@ bool RouteManager::deleteRouteById(int id) {
 			return false; 
 		}
 	}
-	RouteRepository routes = RouteRepository(fileRoutes);
+	RouteRepository routes(fileRoutes);
 	return routes.deleteById(id);
 }
 PlaneModel RouteManager::addPlane(PlaneModel plane) {
-	PlaneRepository planes = PlaneRepository(filePlanes);
+	PlaneRepository planes(filePlanes);
 	PlaneModel m = planes.save(plane);
 	return m;
 }
@@ -44,7 +44,6 @@ void RouteManager::executeRoute(int routeId, int planeId) {
 	updateExecutingRoutes();
 	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
 	executingroutes.save(ExecutingRouteModel(routeId, planeId, timer.getCurrentTime()));
-	return;
 }
 void RouteManager::skipTime(long int skippedMillis)
 {
@@ -55,7 +54,7 @@ std::list<PlaneModel> RouteManager::getFreePlanes() {
 	std::list<PlaneModel> availablePlanes;
 	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
 	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
-	PlaneRepository planes = PlaneRepository(filePlanes);
+	PlaneRepository planes(filePlanes);
 	std::list<PlaneModel> allPlanes = planes.getAll();
 	for (PlaneModel& plane : allPlanes) {
 		bool isUsed = false;
@@ -76,7 +75,7 @@ std::list<RouteModel> RouteManager::getFreeRoutes() {
 	std::list<RouteModel> availableRoutes;
 	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
 	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
-	RouteRepository routes = RouteRepository(fileRoutes);
+	RouteRepository routes(fileRoutes);
 	std::list<RouteModel> allRoutes = routes.getAll();
 	for (RouteModel& route : allRoutes) {
 		bool isUsed = false;
@@ -103,36 +102,38 @@ std::list<ExecutingRouteModel> RouteManager::getExecutingRoutes()
 
 std::list<RouteModel> RouteManager::getAllRoutes()
 {
-	RouteRepository routes = RouteRepository(fileRoutes);
-	routes.getAll();
-	return std::list<RouteModel>();
+	RouteRepository routes(fileRoutes);
+	std::list<RouteModel> allRoutes = routes.getAll();
+	return allRoutes;
 }
 
 std::list<PlaneModel> RouteManager::getAllPlanes()
 {
-	PlaneRepository planes = PlaneRepository(filePlanes);
-	planes.getAll();
-	return std::list<PlaneModel>();
+	PlaneRepository planes(filePlanes);
+	std::list<PlaneModel> allPlanes = planes.getAll();
+	return allPlanes;
 }
 
 std::list<RouteModel> RouteManager::getRouteById(int id)
 {
-	RouteRepository routes = RouteRepository(fileRoutes);
-	routes.getById(id);
-	return std::list<RouteModel>();
+	RouteRepository routes(fileRoutes);
+	std::list<RouteModel> routesbyid;
+	routesbyid.push_back(routes.getById(id));
+	return routesbyid;
 }
 
 std::list<PlaneModel> RouteManager::getPlaneById(int id)
 {
-	PlaneRepository planes = PlaneRepository(filePlanes);
-	planes.getById(id);
-	return std::list<PlaneModel>();
+	PlaneRepository planes(filePlanes);
+	std::list<PlaneModel> planesbyid;
+	planesbyid.push_back(planes.getById(id));
+	return planesbyid;
 }
 std::list<PlaneModel> RouteManager::getFlyingPlanes()
 {
 	updateExecutingRoutes();
 	std::list<PlaneModel> flyingPlanes;
-	PlaneRepository planes = PlaneRepository(filePlanes);
+	PlaneRepository planes(filePlanes);
 	std::list<PlaneModel> allplanes = planes.getAll();
 	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
 	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
@@ -149,7 +150,7 @@ std::list<PlaneModel> RouteManager::getFlyingPlanes()
 			flyingPlanes.push_back(plane);
 		}
 	}
-	return std::list<PlaneModel>();
+	return flyingPlanes;
 }
 std::list<PlaneStatusModel> RouteManager::getPlanesCoordinates()
 {
@@ -168,9 +169,9 @@ void RouteManager::updateExecutingRoutes()
 {
 	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
 	std::list<ExecutingRouteModel> allexecutingRoutes = executingroutes.getAll();
-	PlaneRepository planes = PlaneRepository(filePlanes);
+	PlaneRepository planes(filePlanes);
 	std::list<PlaneModel> allplanes = planes.getAll();
-	RouteRepository routes = RouteRepository(fileRoutes);
+	RouteRepository routes(fileRoutes);
 	std::list<RouteModel> allroutes = routes.getAll();
 	long int currentTime = timer.getCurrentTime();
 
