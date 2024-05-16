@@ -22,7 +22,7 @@ list<RouteModel> RouteRepository::getAll()
 
     if (!file.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
 
     string line;
@@ -65,7 +65,7 @@ RouteModel RouteRepository::getById(int searchId)
 
     if (!file.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
 
     int id;
@@ -91,7 +91,7 @@ RouteModel RouteRepository::getById(int searchId)
             break;
         }
         else {
-            throw runtime_error("Route with this id is not found");
+            throw string("Route with this id is not found");
         }
     }
 
@@ -127,7 +127,7 @@ RouteModel RouteRepository::save(RouteModel data)
 
         if (!file.is_open())
         {
-            throw runtime_error("Falied to access data");
+            throw string("Falied to access data");
         }
 
         file << data.getId() << " " << data.getName() << " "
@@ -145,14 +145,14 @@ bool RouteRepository::deleteById(int id)
     ifstream fileIn(_filePath);
     if (!fileIn.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
 
     ofstream fileOut(_filePath + ".tmp");
 
     if (!fileOut.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
 
     int searchId;

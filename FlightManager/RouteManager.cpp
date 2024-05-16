@@ -38,7 +38,21 @@ bool RouteManager::deletePlaneById(int id) {
 }
 void RouteManager::executeRoute(int routeId, int planeId) {
 	updateExecutingRoutes();
-	executingRouteRepo.save(ExecutingRouteModel(routeId, planeId, timer.getCurrentTime()));
+
+	bool planeAlreadyExecuting = false;
+	for (ExecutingRouteModel executingRoute : executingRouteRepo.getAll()) {
+		if (executingRoute.getPlaneId() == planeId) {
+			planeAlreadyExecuting = true;
+			break;
+		}
+	}
+
+	if (planeAlreadyExecuting) {
+		throw std::string("this plane already flying");
+	}
+	else {
+		executingRouteRepo.save(ExecutingRouteModel(routeId, planeId, timer.getCurrentTime()));
+	}
 }
 void RouteManager::skipTime(long int skippedMillis)
 {

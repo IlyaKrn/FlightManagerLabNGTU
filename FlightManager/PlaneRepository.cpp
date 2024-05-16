@@ -22,7 +22,7 @@ list<PlaneModel> PlaneRepository::getAll()
 
     if (!file.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
     string line;
     while (getline(file, line))
@@ -55,7 +55,7 @@ PlaneModel PlaneRepository::getById(int searchId)
 
     if (!file.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
 
     int id, speed, builtYear;
@@ -76,7 +76,7 @@ PlaneModel PlaneRepository::getById(int searchId)
             break;
         }
         else {
-            throw runtime_error("Plane with this id is not found");
+            throw string("Plane with this id is not found");
         }
     }
 
@@ -114,7 +114,7 @@ PlaneModel PlaneRepository::save(PlaneModel data)
 
         if (!file.is_open())
         {
-            throw runtime_error("Failed to access data");
+            throw string("Failed to access data");
         }
 
         file << data.getId() << " " << data.getModel() << " " << data.getPilot() << " "
@@ -132,14 +132,14 @@ bool PlaneRepository::deleteById(int id)
     ifstream fileIn(_filePath);
     if (!fileIn.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
 
     ofstream fileOut(_filePath + ".tmp");
 
     if (!fileOut.is_open())
     {
-        throw runtime_error("Falied to access data");
+        throw string("Falied to access data");
     }
 
     int searchId;
