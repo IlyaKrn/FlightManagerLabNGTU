@@ -140,14 +140,36 @@ std::list<PlaneStatusModel> RouteManager::getPlanesCoordinates()
 {
 	updateExecutingRoutes();
 	std::list<PlaneStatusModel> planesStatus;
-	for (PlaneStatusModel plane : planesStatus) {
-		PlaneStatusModel planestatus;
-		planestatus.setPlaneId(plane.getPlaneId());
-		planestatus.setCurrentCoordinates(plane.getCurrentCoordinates());
-		planestatus.setTotalTime(plane.getTotalTime());
-		planestatus.setTimeLeft(plane.getTimeLeft());
+	std::list<PlaneModel> allplanes = planeRepo.getAll();
+	std::list<RouteModel> allroutes = routeRepo.getAll();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
+	for (ExecutingRouteModel executingroute : allexecutingroutes) {
+		for (PlaneModel plane : allplanes) {
+			for (RouteModel route : allroutes) {
+				if (plane.getId() == executingroute.getPlaneId()) {
+					if (executingroute.getRouteId() == route.getId()) {
+						int speed;
+						CoordinateModel start;
+						CoordinateModel end;
+						Timer timer;
+						speed = plane.getSpeed();
+						start = route.getStart();
+						end = route.getEnd();
+						double duration = sqrt(pow((end.getX() - start.getX()), 2) + pow((end.getY() - start.getY()), 2));
+						long int elapsedTime = timer.getCurrentTime() - executingroute.getTimestart();
+						double newX = start.getX() + (end.getX() - start.getX()) * (speed * elapsedTime / duration);
+						double newY = start.getY() + (end.getY() - start.getY()) * (speed * elapsedTime / duration);
+						CoordinateModel currentcoordinates;
+						currentcoordinates.setX(newX);
+						currentcoordinates.setY(newX);
+						long int timeleft = duration / (speed * 1000) - timer.getCurrentTime();
+						planesStatus.push_back(PlaneStatusModel(plane.getId(), currentcoordinates, duration, timeleft));
+					}
+				}
+			}
+		}
 	}
-	return std::list<PlaneStatusModel>();
+	return planesStatus;
 }
 void RouteManager::updateExecutingRoutes()
 {
@@ -172,7 +194,7 @@ void RouteManager::updateExecutingRoutes()
 		CoordinateModel end;
 		for (ExecutingRouteModel executeroute : allexecutingRoutes) {
 			for (RouteModel route : allroutes) {
-				if (executeroute.getPlaneId() == route.getId()) {
+				if (executeroute.getRouteId() == route.getId()) {
 					start = route.getStart();
 					end = route.getEnd();
 				}
