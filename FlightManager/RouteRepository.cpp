@@ -10,6 +10,11 @@ RouteRepository::RouteRepository(std::string filepath)
     _filePath = filepath;
 }
 
+RouteRepository::RouteRepository()
+{
+    _filePath = "routes.txt";
+}
+
 list<RouteModel> RouteRepository::getAll()
 {
     list<RouteModel> routes;

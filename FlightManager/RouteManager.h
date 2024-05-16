@@ -3,14 +3,18 @@
 #include "PlaneModel.h"
 #include "PlaneStatusModel.h"
 #include "ExecutingRouteModel.h"
+#include "RouteRepository.h"
+#include "ExecutingRouteRepository.h"
+#include "PlaneRepository.h"
 #include <list>
 #include "Timer.h"
 
 class RouteManager {
 private:
-	const std::string fileRoutes = "routes.txt";
-	const std::string filePlanes = "planes.txt";
 	Timer timer;
+	RouteRepository routeRepo;
+	PlaneRepository planeRepo;
+	ExecutingRouteRepository executingRouteRepo;
 	void updateExecutingRoutes();
 public:
 	RouteManager();

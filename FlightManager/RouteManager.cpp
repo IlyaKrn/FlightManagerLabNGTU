@@ -7,43 +7,38 @@
 #include "ExecutingRouteRepository.h"
 #include "Timer.h"
 #include <cmath>
+
 RouteManager::RouteManager() = default;
+
 RouteModel RouteManager::addRoute(RouteModel route) {
-	RouteRepository routes(fileRoutes);
-	RouteModel m = routes.save(route);
+	RouteModel m = routeRepo.save(route);
 	return m;
 }
 bool RouteManager::deleteRouteById(int id) {
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
 	for (ExecutingRouteModel executingroute : allexecutingroutes) {
 		if (executingroute.getRouteId() == id) {
 			return false; 
 		}
 	}
-	RouteRepository routes(fileRoutes);
-	return routes.deleteById(id);
+	return routeRepo.deleteById(id);
 }
 PlaneModel RouteManager::addPlane(PlaneModel plane) {
-	PlaneRepository planes(filePlanes);
-	PlaneModel m = planes.save(plane);
+	PlaneModel m = planeRepo.save(plane);
 	return m;
 }
 bool RouteManager::deletePlaneById(int id) {
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
 	for (ExecutingRouteModel executingroute : allexecutingroutes) {
 		if (executingroute.getPlaneId() == id) {
 			return false;
 		}
 	}
-	PlaneRepository planes = PlaneRepository(filePlanes);
-	return planes.deleteById(id);
+	return planeRepo.deleteById(id);
 }
 void RouteManager::executeRoute(int routeId, int planeId) {
 	updateExecutingRoutes();
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	executingroutes.save(ExecutingRouteModel(routeId, planeId, timer.getCurrentTime()));
+	executingRouteRepo.save(ExecutingRouteModel(routeId, planeId, timer.getCurrentTime()));
 }
 void RouteManager::skipTime(long int skippedMillis)
 {
@@ -52,10 +47,8 @@ void RouteManager::skipTime(long int skippedMillis)
 std::list<PlaneModel> RouteManager::getFreePlanes() {
 	updateExecutingRoutes();
 	std::list<PlaneModel> availablePlanes;
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
-	PlaneRepository planes(filePlanes);
-	std::list<PlaneModel> allPlanes = planes.getAll();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
+	std::list<PlaneModel> allPlanes = planeRepo.getAll();
 	for (PlaneModel& plane : allPlanes) {
 		bool isUsed = false;
 		for (ExecutingRouteModel& executingroute : allexecutingroutes) {
@@ -73,10 +66,8 @@ std::list<PlaneModel> RouteManager::getFreePlanes() {
 std::list<RouteModel> RouteManager::getFreeRoutes() {
 	updateExecutingRoutes();
 	std::list<RouteModel> availableRoutes;
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
-	RouteRepository routes(fileRoutes);
-	std::list<RouteModel> allRoutes = routes.getAll();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
+	std::list<RouteModel> allRoutes = routeRepo.getAll();
 	for (RouteModel& route : allRoutes) {
 		bool isUsed = false;
 		for (ExecutingRouteModel& executingroute : allexecutingroutes) {
@@ -94,49 +85,42 @@ std::list<RouteModel> RouteManager::getFreeRoutes() {
 std::list<ExecutingRouteModel> RouteManager::getExecutingRoutes() 
 {
 	updateExecutingRoutes();
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
 	return allexecutingroutes;
 }
 
 
 std::list<RouteModel> RouteManager::getAllRoutes()
 {
-	RouteRepository routes(fileRoutes);
-	std::list<RouteModel> allRoutes = routes.getAll();
+	std::list<RouteModel> allRoutes = routeRepo.getAll();
 	return allRoutes;
 }
 
 std::list<PlaneModel> RouteManager::getAllPlanes()
 {
-	PlaneRepository planes(filePlanes);
-	std::list<PlaneModel> allPlanes = planes.getAll();
+	std::list<PlaneModel> allPlanes = planeRepo.getAll();
 	return allPlanes;
 }
 
 std::list<RouteModel> RouteManager::getRouteById(int id)
 {
-	RouteRepository routes(fileRoutes);
 	std::list<RouteModel> routesbyid;
-	routesbyid.push_back(routes.getById(id));
+	routesbyid.push_back(routeRepo.getById(id));
 	return routesbyid;
 }
 
 std::list<PlaneModel> RouteManager::getPlaneById(int id)
 {
-	PlaneRepository planes(filePlanes);
 	std::list<PlaneModel> planesbyid;
-	planesbyid.push_back(planes.getById(id));
+	planesbyid.push_back(planeRepo.getById(id));
 	return planesbyid;
 }
 std::list<PlaneModel> RouteManager::getFlyingPlanes()
 {
 	updateExecutingRoutes();
 	std::list<PlaneModel> flyingPlanes;
-	PlaneRepository planes(filePlanes);
-	std::list<PlaneModel> allplanes = planes.getAll();
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	std::list<ExecutingRouteModel> allexecutingroutes = executingroutes.getAll();
+	std::list<PlaneModel> allplanes = planeRepo.getAll();
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
 	for (PlaneModel plane : allplanes) {
 		bool isFlying = false;
 		for (ExecutingRouteModel route : allexecutingroutes) {
@@ -167,12 +151,9 @@ std::list<PlaneStatusModel> RouteManager::getPlanesCoordinates()
 }
 void RouteManager::updateExecutingRoutes()
 {
-	ExecutingRouteRepository executingroutes = ExecutingRouteRepository();
-	std::list<ExecutingRouteModel> allexecutingRoutes = executingroutes.getAll();
-	PlaneRepository planes(filePlanes);
-	std::list<PlaneModel> allplanes = planes.getAll();
-	RouteRepository routes(fileRoutes);
-	std::list<RouteModel> allroutes = routes.getAll();
+	std::list<ExecutingRouteModel> allexecutingRoutes = executingRouteRepo.getAll();
+	std::list<PlaneModel> allplanes = planeRepo.getAll();
+	std::list<RouteModel> allroutes = routeRepo.getAll();
 	long int currentTime = timer.getCurrentTime();
 
 	auto it = allexecutingRoutes.begin();

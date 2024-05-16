@@ -7,6 +7,7 @@ class RouteRepository : public BaseFileRepository<RouteModel>
 {
 public:
 	RouteRepository(std::string filepath);
+	RouteRepository();
 	std::list<RouteModel> getAll() override;
 	RouteModel getById(int id) override;
 	RouteModel save(RouteModel data) override;

@@ -10,6 +10,11 @@ PlaneRepository::PlaneRepository(string filepath)
     _filePath = filepath;
 }
 
+PlaneRepository::PlaneRepository()
+{
+    _filePath = "planes.txt";
+}
+
 list<PlaneModel> PlaneRepository::getAll()
 {
     list<PlaneModel> planes;

@@ -210,7 +210,12 @@ void Presenter::assignPlaneToRoute(){
 
 void Presenter::getCoordinates(){
 
-    for (PlaneStatusModel& plane : manager.getPlanesCoordinates()) {
+    list<PlaneStatusModel> planes = manager.getPlanesCoordinates();
+    if (planes.size() == 0) {
+        cout << "flying planes not found" << endl;
+        return;
+    }
+    for (PlaneStatusModel& plane : planes) {
         cout <<
             "id: " << plane.getPlaneId() <<
             " total time: " << plane.getTotalTime() <<

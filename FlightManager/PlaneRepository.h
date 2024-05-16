@@ -7,6 +7,7 @@ class PlaneRepository : public BaseFileRepository<PlaneModel>
 {
 public:
 	PlaneRepository(std::string filepath);
+	PlaneRepository();
 	std::list<PlaneModel> getAll() override;
 	PlaneModel getById(int id) override;
 	PlaneModel save(PlaneModel data) override;
