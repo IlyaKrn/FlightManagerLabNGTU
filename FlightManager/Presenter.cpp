@@ -228,6 +228,6 @@ void Presenter::skip(){
     long int skipped;
     cout << "enter skipped seconds" << endl;
     cin >> skipped;
-    manager.skipTime(skipped * 1000);
-    cout << skipped << " milliseconds skipped" << endl;
+    manager.skipTime(skipped);
+    cout << skipped << " seconds skipped" << endl;
 }

@@ -176,7 +176,6 @@ std::list<PlaneStatusModel> RouteManager::getPlanesCoordinates()
 						CoordinateModel currentcoordinates = CoordinateModel(newX, newY);
 						long int totaltime = duration / (speed);
 						long int timeleft = totaltime - elapsedTime;
-						std::cout << totaltime << " " << elapsedTime << std::endl;
 						planesStatus.push_back(PlaneStatusModel(plane.getId(), currentcoordinates, totaltime, timeleft));
 
 					}
