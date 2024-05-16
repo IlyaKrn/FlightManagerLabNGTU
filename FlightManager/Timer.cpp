@@ -1,7 +1,7 @@
 #include "Timer.h"
 #include <chrono>
 #include <ctime>   
-#include <iostream>   
+#include <iostream> 
 using namespace std;
 
 
@@ -12,8 +12,8 @@ Timer::Timer()
 
 long int Timer::getCurrentTime()
 {
-    cout << addedTime << endl;
-    return chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count() + addedTime;
+    cout << time(0) << endl;
+    return time(0) + addedTime;
 }
 
 void Timer::skipTime(long int addingTime)
