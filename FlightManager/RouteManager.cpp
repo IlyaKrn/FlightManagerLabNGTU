@@ -38,8 +38,6 @@ bool RouteManager::deletePlaneById(int id) {
 }
 void RouteManager::executeRoute(int routeId, int planeId) {
 	updateExecutingRoutes();
-	routeRepo.getById(routeId);
-	planeRepo.getById(planeId);
 
 	bool planeAlreadyExecuting = false;
 	for (ExecutingRouteModel executingRoute : executingRouteRepo.getAll()) {
