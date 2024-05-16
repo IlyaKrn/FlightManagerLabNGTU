@@ -24,59 +24,66 @@ int main()
 		"16. exit" << endl;
 	int action = 0;
 	while (true) {
-		cin >> action;
-		switch (action)
-		{
-		case 1:
-			p.createAndAddPlane();
-			break;
-		case 2:
-			p.createAndAddRoute();
-			break;
-		case 3:
-			p.deletePlane();
-			break;
-		case 4:
-			p.deleteRoute();
-			break;
-		case 5:
-			p.getingAllPlanes();
-			break;
-		case 6:
-			p.getingAllRoutes();
-			break;
-		case 7:
-			p.getAvaiablePlanes();
-			break;
-		case 8:
-			p.getAvaiableRoutes();
-			break;
-		case 9:
-			p.getBusyRoutes();
-			break;
-		case 10:
-			p.getBusyPlanes();
-			break;
-		case 11:
-			p.searchPlane();
-			break;
-		case 12:
-			p.searchRoute();
-			break;
-		case 13:
-			p.assignPlaneToRoute();
-			break;
-		case 14:
-			p.skip();
-			break;
-		case 15:
-			p.getCoordinates();
-			break;
-		case 16:
-			return 0;
-		default:
-			cout << "cant find action " << action << endl;
-			break;
+		try {
+			cout << "==================" << endl << "enter action: " << endl;
+			cin >> action;
+			switch (action)
+			{
+			case 1:
+				p.createAndAddPlane();
+				break;
+			case 2:
+				p.createAndAddRoute();
+				break;
+			case 3:
+				p.deletePlane();
+				break;
+			case 4:
+				p.deleteRoute();
+				break;
+			case 5:
+				p.getingAllPlanes();
+				break;
+			case 6:
+				p.getingAllRoutes();
+				break;
+			case 7:
+				p.getAvaiablePlanes();
+				break;
+			case 8:
+				p.getAvaiableRoutes();
+				break;
+			case 9:
+				p.getBusyRoutes();
+				break;
+			case 10:
+				p.getBusyPlanes();
+				break;
+			case 11:
+				p.searchPlane();
+				break;
+			case 12:
+				p.searchRoute();
+				break;
+			case 13:
+				p.assignPlaneToRoute();
+				break;
+			case 14:
+				p.skip();
+				break;
+			case 15:
+				p.getCoordinates();
+				break;
+			case 16:
+				return 0;
+			default:
+				cout << "cant find action " << action << endl;
+				break;
+			}
 		}
+		catch (...) {
+			cout << "ERROR" << endl;
+		}
+		
 	}
 }

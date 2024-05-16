@@ -29,11 +29,16 @@ void Presenter::deletePlane() {
     cout << "enter id" << endl;
     int id;
     cin >> id;
-    cout << "plane with id: " << id << (manager.deletePlaneById(id) ? " deleted successful" : "failed to delete") << endl;
+    cout << "plane with id: " << id << (manager.deletePlaneById(id) ? " deleted successful" : " failed to delete") << endl;
 }
 
 void Presenter::getingAllPlanes() {
-    for (PlaneModel& plane : manager.getAllPlanes()) {
+    list<PlaneModel> planes = manager.getAllPlanes();
+    if (planes.size() == 0) {
+        cout << "planes not found" << endl;
+        return;
+    }
+    for (PlaneModel& plane : planes) {
         cout <<
             "id: " << plane.getId() <<
             " model: " << plane.getModel() <<
@@ -46,8 +51,14 @@ void Presenter::getingAllPlanes() {
 
 void Presenter::searchPlane() {
     int id;
+    cout << "enter id" << endl;
     cin >> id;
-    for (PlaneModel& plane : manager.getPlaneById(id)) {
+    list<PlaneModel> planes = manager.getPlaneById(id);
+    if (planes.size() == 0) {
+        cout << "planes not found" << endl;
+        return;
+    }
+    for (PlaneModel& plane : planes) {
         cout <<
             "id: " << plane.getId() <<
             " model: " << plane.getModel() <<
@@ -85,11 +96,16 @@ void Presenter::deleteRoute(){
     cout << "enter id" << endl;
     int id;
     cin >> id;
-    cout << "route with id: " << id << (manager.deletePlaneById(id) ? " deleted successful" : "failed to delete") << endl;
+    cout << "route with id: " << id << (manager.deletePlaneById(id) ? " deleted successful" : " failed to delete") << endl;
 }
 
 void Presenter::getingAllRoutes(){
-    for (RouteModel& route : manager.getAllRoutes()) {
+    list<RouteModel> routes = manager.getAllRoutes();
+    if (routes.size() == 0) {
+        cout << "routes not found" << endl;
+        return;
+    }
+    for (RouteModel& route : routes) {
         cout <<
             "id: " << route.getId() <<
             " name: " << route.getName() <<
@@ -99,10 +115,15 @@ void Presenter::getingAllRoutes(){
 }
 
 void Presenter::searchRoute(){
-    cout << "enter id" << endl;
     int id;
+    cout << "enter id" << endl;
     cin >> id;
-    for (RouteModel& route : manager.getRouteById(id)) {
+    list<RouteModel> routes = manager.getRouteById(id);
+    if (routes.size() == 0) {
+        cout << "routes not found" << endl;
+        return;
+    }
+    for (RouteModel& route : routes) {
         cout <<
             "id: " << route.getId() <<
             " name: " << route.getName() <<
@@ -112,7 +133,12 @@ void Presenter::searchRoute(){
 }
 
 void Presenter::getBusyRoutes(){
-    for (ExecutingRouteModel& route : manager.getExecutingRoutes()) {
+    list<ExecutingRouteModel> routes = manager.getExecutingRoutes();
+    if (routes.size() == 0) {
+        cout << "erxecuting routes not found" << endl;
+        return;
+    }
+    for (ExecutingRouteModel& route : routes) {
         cout <<
             "plane id: " << route.getPlaneId() <<
             " route id: " << route.getRouteId() <<
@@ -121,7 +147,12 @@ void Presenter::getBusyRoutes(){
 }
 
 void Presenter::getAvaiableRoutes(){
-    for (RouteModel& route : manager.getFreeRoutes()) {
+    list<RouteModel> routes = manager.getFreeRoutes();
+    if (routes.size() == 0) {
+        cout << "aviable routes not found" << endl;
+        return;
+    }
+    for (RouteModel& route : routes) {
         cout <<
             "id: " << route.getId() <<
             " name: " << route.getName() <<
@@ -131,7 +162,12 @@ void Presenter::getAvaiableRoutes(){
 }
 
 void Presenter::getBusyPlanes(){
-    for (PlaneModel& plane : manager.getFlyingPlanes()) {
+    list<PlaneModel> planes = manager.getFlyingPlanes();
+    if (planes.size() == 0) {
+        cout << "flying planes not found" << endl;
+        return;
+    }
+    for (PlaneModel& plane : planes) {
         cout <<
             "id: " << plane.getId() <<
             " model: " << plane.getModel() <<
@@ -143,7 +179,12 @@ void Presenter::getBusyPlanes(){
 }
 
 void Presenter::getAvaiablePlanes(){
-    for (PlaneModel& plane : manager.getFreePlanes()) {
+    list<PlaneModel> planes = manager.getFreePlanes();
+    if (planes.size() == 0) {
+        cout << "aviable planes not found" << endl;
+        return;
+    }
+    for (PlaneModel& plane : planes) {
         cout <<
             "id: " << plane.getId() <<
             " model: " << plane.getModel() <<
