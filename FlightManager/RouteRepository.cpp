@@ -85,6 +85,9 @@ RouteModel RouteRepository::getById(int searchId)
             route.setEnd(end);
             break;
         }
+        else {
+            throw runtime_error("Route with this id is not found");
+        }
     }
 
     file.close();

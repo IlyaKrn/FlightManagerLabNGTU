@@ -28,21 +28,12 @@ list<PlaneModel> PlaneRepository::getAll()
         string model, pilot, country;
         bool isFlying;
 
-        if (!(iss >> id >> model >> pilot >> speed >> builtYear >> country >> isFlying))
+        if (!(iss >> id >> model >> pilot >> speed >> builtYear >> country))
         {
             continue;
         }
 
-        PlaneModel plane;
-        plane.setId(id);
-        plane.setModel(model);
-        plane.setPilot(pilot);
-        plane.setSpeed(speed);
-        plane.setBuiltYear(builtYear);
-        plane.setCountry(country);
-
-        planes.push_back(plane);
-
+        planes.push_back(PlaneModel(id,model,pilot,speed,builtYear,country));
 
     }
 
@@ -53,7 +44,7 @@ list<PlaneModel> PlaneRepository::getAll()
 }
 
 
-PlaneModel PlaneRepository::getById(int id)
+PlaneModel PlaneRepository::getById(int searchId)
 {
     ifstream file(_filePath);
 
@@ -62,12 +53,12 @@ PlaneModel PlaneRepository::getById(int id)
         throw runtime_error("Falied to access data");
     }
 
-    int searchId, speed, builtYear;
+    int id, speed, builtYear;
     string model, pilot, country;
     bool isFlying;
 
     PlaneModel plane;
-    while (file >> searchId >> model >> pilot >> speed >> builtYear >> country >> isFlying)
+    while (file >> id >> model >> pilot >> speed >> builtYear >> country)
     {
         if (searchId == id)
         {
@@ -78,6 +69,9 @@ PlaneModel PlaneRepository::getById(int id)
             plane.setBuiltYear(builtYear);
             plane.setCountry(country);
             break;
+        }
+        else {
+            throw runtime_error("Plane with this id is not found");
         }
     }
 
