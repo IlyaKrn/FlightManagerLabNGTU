@@ -81,6 +81,9 @@ int main()
 				break;
 			}
 		}
+		catch (string exception) {
+			cout << exception << endl;
+		}
 		catch (...) {
 			cout << "ERROR" << endl;
 		}
