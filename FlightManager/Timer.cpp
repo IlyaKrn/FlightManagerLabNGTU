@@ -1,7 +1,6 @@
 #include "Timer.h"
 #include <chrono>
-#include <ctime>   
-#include <iostream> 
+#include <ctime>
 using namespace std;
 
 
@@ -12,7 +11,6 @@ Timer::Timer()
 
 long int Timer::getCurrentTime()
 {
-    cout << time(0) << endl;
     return time(0) + addedTime;
 }
 

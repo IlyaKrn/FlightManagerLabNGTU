@@ -142,7 +142,7 @@ void Presenter::getBusyRoutes(){
         cout <<
             "plane id: " << route.getPlaneId() <<
             " route id: " << route.getRouteId() <<
-            " timestart: (" << route.getTimestart() << endl;
+            " timestart: " << route.getTimestart() << " (unix)" << endl;
     }
 }
 
@@ -218,16 +218,16 @@ void Presenter::getCoordinates(){
     for (PlaneStatusModel& plane : planes) {
         cout <<
             "id: " << plane.getPlaneId() <<
-            " total time: " << plane.getTotalTime() <<
-            " time left: " << plane.getTimeLeft() <<
+            " total time: " << plane.getTotalTime() << "(s)" <<
+            " time left: " << plane.getTimeLeft() << "(s)" <<
             " coordinates: (" << plane.getCurrentCoordinates().getX() << ", " << plane.getCurrentCoordinates().getY() << ")" << endl;
     }
 }
 
 void Presenter::skip(){
     long int skipped;
-    cout << "enter skipped milliseconds" << endl;
+    cout << "enter skipped seconds" << endl;
     cin >> skipped;
-    manager.skipTime(skipped);
+    manager.skipTime(skipped * 1000);
     cout << skipped << " milliseconds skipped" << endl;
 }
