@@ -38,6 +38,8 @@ bool RouteManager::deletePlaneById(int id) {
 }
 void RouteManager::executeRoute(int routeId, int planeId) {
 	updateExecutingRoutes();
+	routeRepo.getById(routeId);
+	planeRepo.getById(planeId);
 
 	bool planeAlreadyExecuting = false;
 	for (ExecutingRouteModel executingRoute : executingRouteRepo.getAll()) {
@@ -187,44 +189,34 @@ std::list<PlaneStatusModel> RouteManager::getPlanesCoordinates()
 }
 void RouteManager::updateExecutingRoutes()
 {
-	std::list<ExecutingRouteModel> allexecutingRoutes = executingRouteRepo.getAll();
+	std::list<PlaneStatusModel> planesStatus;
 	std::list<PlaneModel> allplanes = planeRepo.getAll();
 	std::list<RouteModel> allroutes = routeRepo.getAll();
-	long int currentTime = timer.getCurrentTime();
-
-	auto it = allexecutingRoutes.begin();
-
-	while (it != allexecutingRoutes.end())
-	{
-		int speed;
-		for (ExecutingRouteModel executeroute : allexecutingRoutes) {
-			for (PlaneModel plane : allplanes) {
-				if (executeroute.getPlaneId() == plane.getId()) {
-					speed = plane.getSpeed();
-				}
-			}
-		}
-		CoordinateModel start;
-		CoordinateModel end;
-		for (ExecutingRouteModel executeroute : allexecutingRoutes) {
+	std::list<ExecutingRouteModel> allexecutingroutes = executingRouteRepo.getAll();
+	std::list<int> outOfTime = std::list<int>();
+	for (ExecutingRouteModel executingroute : allexecutingroutes) {
+		for (PlaneModel plane : allplanes) {
 			for (RouteModel route : allroutes) {
-				if (executeroute.getRouteId() == route.getId()) {
-					start = route.getStart();
-					end = route.getEnd();
+				if (plane.getId() == executingroute.getPlaneId()) {
+					if (executingroute.getRouteId() == route.getId()) {
+
+						int speed = plane.getSpeed();
+						CoordinateModel start = route.getStart();
+						CoordinateModel end = route.getEnd();
+
+						double duration = sqrt(pow((end.getX() - start.getX()), 2) + pow((end.getY() - start.getY()), 2));
+						long int elapsedTime = timer.getCurrentTime() - executingroute.getTimestart();
+
+						long int totaltime = duration / (speed);
+						long int timeleft = totaltime - elapsedTime;
+						if (timeleft < 0)
+							outOfTime.push_back(executingroute.getRouteId());
+					}
 				}
 			}
 		}
-		double duration = sqrt(pow((end.getX() - start.getX()),2) + pow((end.getY() - start.getY()), 2));
-
-		long int routeEndTime = it->getTimestart() + duration / (speed * 1000);
-
-		if (currentTime > routeEndTime)
-		{
-			it = allexecutingRoutes.erase(it);
-		}
-		else
-		{
-			++it;
-		}
+	}
+	for (int i : outOfTime) {
+		executingRouteRepo.deleteById(i);
 	}
 }
